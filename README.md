@@ -1,5 +1,5 @@
 # Active_deactive
-
+multi update
 public void Checkedgrid()
         {
             for (int i = 0; i < userGrid.Rows.Count; i++)
@@ -30,6 +30,31 @@ public void Checkedgrid()
 
 
                 }
+            }
+        }
+
+        Single update
+           protected void active_inactive_CheckedChanged(object sender, EventArgs e)
+        {
+            string userid = Session["userid"].ToString();
+            CheckBox chkBox = (CheckBox)sender;
+            bool chec = Convert.ToBoolean(chkBox.Checked);
+            GridViewRow row = (GridViewRow)chkBox.NamingContainer;
+            int id = Convert.ToInt32(((Label)row.FindControl("lblID")).Text);
+            string result = clsprpduct.ActiveDeActive(id, chec, userid);
+            if (result == "Deactive")
+            {
+                Response.Write("<script>alert('Service Deactive successfully')</script>");
+
+            }
+            else if (result == "active")
+            {
+                Response.Write("<script>alert('Service Active successfully')</script>");
+
+            }
+            else
+            {
+                Response.Write("<script>alert('Error')</script>");
             }
         }
 
